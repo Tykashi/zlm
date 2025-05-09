@@ -58,8 +58,7 @@ pub const Environment = struct {
         return 0;
     }
 
-    pub fn start(self: *Environment, ctx: ?*zcont.Context) anyerror!void {
-        _ = ctx;
+    pub fn start(self: *Environment) anyerror!void {
         self.logger.log(.info, "Environment start!", .{});
 
         const allocator = std.heap.page_allocator;
@@ -85,33 +84,27 @@ pub const Environment = struct {
         self.logger.log(.info, "Environment Loaded", .{});
     }
 
-    pub fn stop(self: *Environment, ctx: *zcont.Context) anyerror!void {
+    pub fn stop(self: *Environment) anyerror!void {
         self.logger.log(.info, "Environment stop!", .{});
-        _ = ctx;
         // No resource to clean up in current implementation
     }
 
-    pub fn before_start(self: *Environment, ctx: *zcont.Context) anyerror!void {
+    pub fn before_start(self: *Environment) anyerror!void {
         self.logger.log(.info, "Environment before_start!", .{});
-        _ = ctx;
     }
 
-    pub fn after_start(self: *Environment, ctx: *zcont.Context) anyerror!void {
+    pub fn after_start(self: *Environment) anyerror!void {
         self.logger.log(.info, "Environment after_start!", .{});
-        _ = ctx;
     }
 
     pub fn before_stop(
         self: *Environment,
-        ctx: *zcont.Context,
     ) anyerror!void {
         self.logger.log(.info, "Environment before_stop!", .{});
-        _ = ctx;
     }
 
-    pub fn after_stop(self: *Environment, ctx: *zcont.Context) anyerror!void {
+    pub fn after_stop(self: *Environment) anyerror!void {
         self.logger.log(.info, "Environment after_stop!", .{});
-        _ = ctx;
     }
     pub fn fill(self: *Environment, comptime T: type, target: *T) !void {
         const type_info = @typeInfo(T);
