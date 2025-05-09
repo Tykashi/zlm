@@ -65,7 +65,7 @@ pub const Manager = struct {
                     if (@hasDecl(T, "threaded") and T.threaded) {
                         const thread = try std.Thread.spawn(.{}, T.start, .{ typed, &self.context });
                         try thread.setName(name);
-                        _ = thread.join();
+                        _ = thread.detach();
                         self.logger.log(.info, "Spawned thread for {s}", .{name});
                     } else {
                         try typed.start(&self.context);
