@@ -65,6 +65,7 @@ pub const Manager = struct {
 
                     if (@hasDecl(T, "threaded") and T.threaded) {
                         const thread = try std.Thread.spawn(.{}, T.start, .{ typed });
+                        self.logger.log(.info, "Thread created for {s}", .{name});
                         try thread.setName(name);
                     } else {
                         try typed.start();
