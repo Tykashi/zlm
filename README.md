@@ -28,7 +28,7 @@ It lets you define components with life-cycle hooks and dependencies, and ensure
     zig fetch --save git+https://github.com/Tykashi/zlm
     ```
 
-2. In `build.zig`, add `zlm` as a dependency:
+2. In `build.zig`, add `zlm`, `zchan`, `zcont`, and `zlog` as dependencies:
 
     ```zig
     const zlm = b.dependency("zlm", .{
