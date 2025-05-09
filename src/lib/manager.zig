@@ -19,7 +19,7 @@ pub const ZLMStartPlan = struct {
 pub const Manager = struct {
     allocator: std.mem.Allocator,
     components: std.StringHashMap(*anyopaque),
-    logger: zlog.Logger,
+    logger: *zlog.Logger,
     graph: Graph,
     context: zcont.Context,
     msgChan: *zchan.Channel(ManagerControlMessage),
@@ -30,7 +30,7 @@ pub const Manager = struct {
         self.* = .{
             .allocator = allocator,
             .components = std.StringHashMap(*anyopaque).init(allocator),
-            .logger = zlog.Logger.init(allocator, "ZLM", true),
+            .logger = try allocator.create(zlog.Logger),
             .graph = Graph.init(allocator),
             .context = zcont.Context{
                 .deadline_ns = 10_000_000,
@@ -38,6 +38,7 @@ pub const Manager = struct {
             },
             .msgChan = msgChan,
         };
+        self.logger.* = zlog.Logger.init(allocator);
         _ = config;
         return self;
     }
