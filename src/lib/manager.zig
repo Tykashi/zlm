@@ -122,6 +122,7 @@ pub const Manager = struct {
     }
 
     pub fn waitForShutdown(self: *Manager, plan: ZLMStartPlan) !void {
+        self.logger.log(.info, "Waiting for shutdown", .{});
         const msg = self.msgChan.recv();
         switch (msg) {
             .Shutdown => {
