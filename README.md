@@ -41,15 +41,10 @@ It lets you define components with life-cycle hooks and dependencies, and ensure
         .target = target,
         .optimize = optimize,
     });
-    const zcont = b.dependency("zcont", .{
-        .target = target,
-        .optimize = optimize,
-    });
 
     exe_mod.addImport("zlm", zlm.module("zlm"));
     exe_mod.addImport("zchan", zchan.module("zchan"));
     exe_mod.addImport("zlog", zlog.module("zlog"));
-    exe_mod.addImport("zcont", zcont.module("zcont"));
     ```
 
 ---
