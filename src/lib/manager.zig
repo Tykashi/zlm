@@ -38,7 +38,7 @@ pub const Manager = struct {
             },
             .msgChan = msgChan,
         };
-        self.logger.* = zlog.Logger.init(allocator);
+        self.logger.* = zlog.Logger.init(allocator, "ZLM", true);
         _ = config;
         return self;
     }
