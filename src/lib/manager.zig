@@ -44,29 +44,19 @@ pub const Manager = struct {
 
     pub fn bootstrap(self: *Manager, plan: ZLMStartPlan) !void {
         Manager.printZLMHeader(plan.start_order);
-        for (plan.start_order) |name| {
-            var found = false;
-            inline for (plan.type_table) |T| {
-                if (std.mem.eql(u8, shortTypeName(T), name)) {
-                    const instance = try self.allocator.create(T);
-                    try self.components.put(name, instance);
-                    instance.* = T.init(self) catch {
-                        self.logger.log(.@"error", "Failed to init {s}", .{shortTypeName(T)});
-                        return;
-                    };
-                    found = true;
-                    break;
-                }
-            }
-            if (!found) return error.TypeNotFound;
-        }
 
         for (plan.start_order) |name| {
             var found = false;
             inline for (plan.type_table) |T| {
                 if (std.mem.eql(u8, shortTypeName(T), name)) {
-                    const instance_ptr = self.components.get(name) orelse return error.ComponentNotFound;
-                    const typed: *T = @ptrCast(@alignCast(instance_ptr));
+                    const instance = try self.allocator.create(T);
+                    instance.* = T.init(self) catch {
+                        self.logger.log(.@"error", "Failed to init {s}", .{shortTypeName(T)});
+                        return;
+                    };
+                    try self.components.put(name, instance);
+
+                    const typed: *T = instance;
 
                     if (@hasDecl(T, "before_start")) {
                         try typed.before_start(&self.context);
@@ -132,7 +122,6 @@ pub const Manager = struct {
 
     pub fn waitForShutdown(self: *Manager, plan: ZLMStartPlan) !void {
         const msg = self.msgChan.recv();
-        self.logger.log(.info, "Received Message! {s}", .{@tagName(msg)});
         switch (msg) {
             .Shutdown => {
                 self.logger.log(.info, "Shutdown requested", .{});

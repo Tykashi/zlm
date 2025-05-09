@@ -24,15 +24,28 @@ zig fetch --save git+https://github.com/Tykashi/zlm
 ```
 
 2. In `build.zig`, add `zlm` as a dependency:
-```
 ```zig
-const zlm = b.dependency("zlm", .{
-    .target = target,
-    .optimize = optimize,
-});
-
+    const zlm = b.dependency("zlm", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    const zchan = b.dependency("zchan", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    const zlog = b.dependency("zlog", .{
+        .target = target,
+        .optimize = optimize,
+    });
+    const zcont = b.dependency("zcont", .{
+        .target = target,
+        .optimize = optimize,
+    });
 // Wherever you configure your executable:
-exe.root_module.addImport("zlm", zlm.module("zlm"));
+    exe_mod.addImport("zlm", zlm.module("zlm"));
+    exe_mod.addImport("zchan", zchan.module("zchan"));
+    exe_mod.addImport("zlog", zlog.module("zlog"));
+    exe_mod.addImport("zcont", zcont.module("zcont"));
 ```
 
 ## ⚠️ Warnings
@@ -60,4 +73,4 @@ ZLM is **experimental** and still under early development. While its design emph
 
 ---
 
-Contributions welcome! Help improve memory handling or add full cleanup support by opening a PR.
+Contributions welcome
