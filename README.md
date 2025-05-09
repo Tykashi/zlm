@@ -5,8 +5,6 @@
 
 It lets you define components with life-cycle hooks and dependencies, and ensures they are initialized, started, and stopped in the correct order — all without reflection, macros, or runtime type information.
 
-> **Zero runtime reflection. Fully type-safe. Minimal overhead.**
-
 ---
 
 ## 🚀 Features
@@ -15,8 +13,8 @@ It lets you define components with life-cycle hooks and dependencies, and ensure
 - ✅ **Topological sort** of component startup based on dependencies  
 - ✅ **Life-cycle hooks** (`init`, `start`, `stop`, `before_*`, `after_*`)  
 - ✅ **Threaded or non-threaded startup** per component  
-- ✅ **Graceful shutdown support**  
-- ✅ **Minimal and fast**
+- ✅ **Graceful shutdown support with component**  
+- ✅ **Minimal and fast?**
 
 ---
 
