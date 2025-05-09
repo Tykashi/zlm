@@ -34,7 +34,6 @@ const zlm = b.dependency("zlm", .{
 // Wherever you configure your executable:
 exe.root_module.addImport("zlm", zlm.module("zlm"));
 ```
-```
 
 ## ⚠️ Warnings
 
@@ -45,11 +44,11 @@ ZLM is **experimental** and still under early development. While its design emph
   - The `Manager` itself and its internal `StringHashMap` of components are not deallocated on shutdown.
   - If your components allocate memory, it's your responsibility to release it inside their `.stop()` or `.after_stop()` hooks.
 
-- 🧼 **No automatic teardown:**
-  - `Manager.shutdown()` orchestrates the lifecycle teardown by calling hooks (`before_stop`, `stop`, `after_stop`), but does **not** deallocate memory or destroy resources.
+- 🧼 **No automatic tear down:**
+  - `Manager.shutdown()` orchestrates the life-cycle tear down by calling hooks (`before_stop`, `stop`, `after_stop`), but does **not** deallocate memory or destroy resources.
 
 - 🧪 **Not yet production-hardened:**
-  - While stable for demos, CLI tools, and small services, it hasn’t been battle-tested in long-running or high-concurrency environments.
+  - While stable for demos, CLI tools, and small services, it has not been battle-tested in long-running or high-concurrency environments.
 
 ---
 
