@@ -60,20 +60,18 @@ pub const Manager = struct {
                     const typed: *T = instance;
 
                     if (@hasDecl(T, "before_start")) {
-                        try typed.before_start(&self.context);
+                        try typed.before_start();
                     }
 
                     if (@hasDecl(T, "threaded") and T.threaded) {
-                        self.logger.log(.info, "Has Threaded Declaration", .{});
-                        const thread = try std.Thread.spawn(.{}, T.start, .{ typed, &self.context });
+                        const thread = try std.Thread.spawn(.{}, T.start, .{ typed });
                         try thread.setName(name);
-                        self.logger.log(.info, "Spawned thread for {s}", .{name});
                     } else {
-                        try typed.start(&self.context);
+                        try typed.start();
                     }
 
                     if (@hasDecl(T, "after_start")) {
-                        try typed.after_start(&self.context);
+                        try typed.after_start();
                     }
 
                     found = true;
@@ -153,7 +151,7 @@ pub const Manager = struct {
 
                     if (@hasDecl(T, "before_stop")) {
                         self.logger.log(.info, "Running {s}.before_stop()", .{name});
-                        typed.before_stop(&self.context) catch |err| {
+                        typed.before_stop() catch |err| {
                             self.logger.log(.warn, "Error running {s}.before_stop(): {}", .{ name, err });
                         };
                     }
@@ -161,13 +159,13 @@ pub const Manager = struct {
                     // If it has stop(), call it
                     if (@hasDecl(T, "stop")) {
                         self.logger.log(.info, "Running {s}.stop()", .{name});
-                        typed.stop(&self.context) catch |err| {
+                        typed.stop() catch |err| {
                             self.logger.log(.warn, "Error running {s}.stop(): {}", .{ name, err });
                         };
                     }
                     if (@hasDecl(T, "after_stop")) {
                         self.logger.log(.info, "Running {s}.after_stop()", .{name});
-                        typed.after_stop(&self.context) catch |err| {
+                        typed.after_stop() catch |err| {
                             self.logger.log(.warn, "Error running {s}.after_stop(): {}", .{ name, err });
                         };
                     }
