@@ -1,7 +1,6 @@
-const zlm = @import("./manager.zig");
 const zcont = @import("zcont");
-pub const Manager = zlm.Manager;
-pub const ZLMStartPlan = zlm.ZLMStartPlan;
-pub const ManagerControlMessage = zlm.ManagerControlMessage;
+pub const Manager = @import("manager.zig").Manager;
+pub const ZLMStartPlan = @import("manager.zig").ZLMStartPlan;
+pub const ManagerControlMessage = @import("manager.zig").ManagerControlMessage;
 
 pub const Context = zcont.Context;
