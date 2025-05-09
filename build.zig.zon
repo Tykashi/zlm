@@ -49,8 +49,8 @@
             .hash = "zdsa-0.0.0-esChijoWAADnbq_Vv_BBEiAo8uTRNEMJ4HsrQs4aMPxu",
         },
         .zlog = .{
-            .url = "git+https://github.com/Tykashi/zlog.git#a7852456fe6adb3fbf4db39e23a014daa8bdec68",
-            .hash = "zlog-0.0.1-EtdQHPcdAAD1928CG4MGNoOaJcOlzM0Ju_vjyocV24MQ",
+            .url = "git+https://github.com/Tykashi/zlog.git#dbabf424a2239c3ccfda285fd93adf464dd70236",
+            .hash = "zlog-0.0.1-EtdQHFkeAADRARsyXWtR6-EaU-ipIQj2rDnLiWx09_yv",
         },
     },
     .paths = .{
