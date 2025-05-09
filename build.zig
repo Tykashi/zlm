@@ -29,11 +29,6 @@ pub fn build(b: *std.Build) void {
         .target = target,
         .optimize = optimize,
     });
-
-    const pg = b.dependency("pg", .{
-        .target = target,
-        .optimize = optimize,
-    });
     // This creates a "module", which represents a collection of source files alongside
     // some compilation options, such as optimization mode and linked system libraries.
     // Every executable or library we compile will be based on one or more modules.
@@ -42,7 +37,7 @@ pub fn build(b: *std.Build) void {
         // only contains e.g. external object files, you can make this `null`.
         // In this case the main source file is merely a path, however, in more
         // complicated build scripts, this could be a generated file.
-        .root_source_file = b.path("src/lib/lib.zig"),
+        .root_source_file = b.path("./src/lib.zig"),
         .target = target,
         .optimize = optimize,
     });
@@ -61,7 +56,6 @@ pub fn build(b: *std.Build) void {
     exe_mod.addImport("zcont", zcont.module("zcont"));
     exe_mod.addImport("zchan", zchan.module("zchan"));
     exe_mod.addImport("zlog", zlog.module("zlog"));
-    exe_mod.addImport("pg", pg.module("pg"));
     // Modules can depend on one another using the `std.Build.Module.addImport` function.
     // This is what allows Zig source code to use `@import("foo")` where 'foo' is not a
     // file path. In this case, we set up `exe_mod` to import `lib_mod`.
