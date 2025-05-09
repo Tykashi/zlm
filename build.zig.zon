@@ -44,10 +44,6 @@
             .url = "git+https://github.com/Tykashi/zcont.git#0052394309bf48ce9ef9b0cba47c7aff326b82a7",
             .hash = "zcont-0.0.0-D1lTgAEYAABf0J5eqHjv7RutQxBxcNuU-ukU5ohpKIsL",
         },
-        .zdsa = .{
-            .url = "git+https://github.com/Tykashi/zdsa.git#d581990bd0c1c1d583bc3751c8d195cfb01a7b7a",
-            .hash = "zdsa-0.0.0-esChijoWAADnbq_Vv_BBEiAo8uTRNEMJ4HsrQs4aMPxu",
-        },
         .zlog = .{
             .url = "git+https://github.com/Tykashi/zlog.git#1f66312482fa5db6fbc2a3bedc1e650583624d2e",
             .hash = "zlog-0.0.1-EtdQHJQVAAAAaaKMojWuC0gM6B6n579VMTnmoX0HkCpe",

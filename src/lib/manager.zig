@@ -1,7 +1,6 @@
 const std = @import("std");
 const Graph = @import("./graph.zig").Graph;
 const zlog = @import("zlog");
-const zcont = @import("zcont");
 const zchan = @import("zchan");
 const zon = @import("build");
 
@@ -21,7 +20,6 @@ pub const Manager = struct {
     components: std.StringHashMap(*anyopaque),
     logger: *zlog.Logger,
     graph: Graph,
-    context: zcont.Context,
     msgChan: *zchan.Channel(ManagerControlMessage),
 
     pub fn init(allocator: std.mem.Allocator, config: anytype) !*Manager {
@@ -32,10 +30,6 @@ pub const Manager = struct {
             .components = std.StringHashMap(*anyopaque).init(allocator),
             .logger = try allocator.create(zlog.Logger),
             .graph = Graph.init(allocator),
-            .context = zcont.Context{
-                .deadline_ns = 10_000_000,
-                .cancelled_flag = std.atomic.Value(bool).init(false),
-            },
             .msgChan = msgChan,
         };
         self.logger.* = zlog.Logger.init(allocator, "ZLM", true);
