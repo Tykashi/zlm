@@ -121,12 +121,12 @@ pub const Manager = struct {
             const msg = self.msgChan.recv();
             switch (msg) {
                 .Shutdown => {
-                    self.logger.log(.info, "Shutdown requested {any}", .{msg});
+                    self.logger.log(.info, "Shutdown requested", .{});
                     try self.shutdown(plan);
                     std.process.exit(0);
                 },
                 else => {
-                    self.logger.log(.warn, "Unhandled control message: {any}", .{msg});
+                    self.logger.log(.warn, "Unhandled control message", .{});
                 },
             }
         }
