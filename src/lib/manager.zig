@@ -58,7 +58,7 @@ pub const Manager = struct {
                     }
 
                     if (@hasDecl(T, "threaded") and T.threaded) {
-                        const thread = try std.Thread.spawn(.{}, T.start, .{ typed });
+                        const thread = try std.Thread.spawn(.{}, T.start, .{typed});
                         self.logger.log(.info, "Thread created for {s}", .{name});
                         try thread.setName(name);
                     } else {
@@ -120,7 +120,7 @@ pub const Manager = struct {
         const msg = self.msgChan.recv();
         switch (msg) {
             .Shutdown => {
-                self.logger.log(.info, "Shutdown requested", .{});
+                self.logger.log(.info, "Shutdown requested {}", .{msg});
                 try self.shutdown(plan);
             },
             else => {
