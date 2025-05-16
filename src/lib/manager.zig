@@ -117,15 +117,18 @@ pub const Manager = struct {
 
     pub fn waitForShutdown(self: *Manager, plan: ZLMStartPlan) !void {
         self.logger.log(.info, "Waiting for shutdown", .{});
-        const msg = self.msgChan.recv();
-        switch (msg) {
-            .Shutdown => {
-                self.logger.log(.info, "Shutdown requested {}", .{msg});
-                try self.shutdown(plan);
-            },
-            else => {
-                self.logger.log(.warn, "Unhandled control message: {}", .{msg});
-            },
+        while (true) {
+            const msg = self.msgChan.recv();
+            switch (msg) {
+                .Shutdown => {
+                    self.logger.log(.info, "Shutdown requested {}", .{msg});
+                    try self.shutdown(plan);
+                    std.process.exit(0);
+                },
+                else => {
+                    self.logger.log(.warn, "Unhandled control message: {}", .{msg});
+                },
+            }
         }
     }
 
